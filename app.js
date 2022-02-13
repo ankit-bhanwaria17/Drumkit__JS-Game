@@ -14,9 +14,20 @@ function removeTransition(event) {
     this.classList.remove("playing");
 }
 
+function onKeyClick(event){
+    let keyCode = this.getAttribute('data-key');
+    const audio = document.querySelector(`audio[data-key="${keyCode}"]`);
+    this.classList.add("playing");
+    audio.currentTime = 0;
+    audio.play();
+}
+
 const keys = document.querySelectorAll(".key");
+
 keys.forEach((key) => {
-    key.addEventListener("transitionend", removeTransition.bind(key));
+    key.addEventListener("transitionend", removeTransition);
+    key.addEventListener("click", onKeyClick);
 });
 
 window.addEventListener("keydown", playSound);
+
